@@ -1,0 +1,504 @@
+<html>
+<head>
+<title>Circles</title>
+<link rel="icon" href="circles7.png" type="image/png">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<!--<link rel="icon" href="clock5.png" sizes="16x16" type="image/png">-->
+<style>
+body {
+    font-family: 'Helvetica Neue';font-size: 16.9px; font-weight: 600;
+}
+h1 {
+  letter-spacing: -2px;
+}
+h2 {
+  letter-spacing: -1px;
+}
+body {
+  letter-spacing: -0.5px;
+}
+body {
+  font-size: 30px;
+  overflow: hidden; /* Hide scrollbars */
+  height:100%;
+}
+.button {background-color: #555555; color: white; border-radius: 8px; font-family: "Helvetica Neue"; font-weight: 600; border: none; font-size: 50px; transition-duration: 0.4s;} /* Black */
+.button:hover {background-color: #2b2b2b; color: white; border-radius: 8px; font-family: "Helvetica Neue"; font-weight: 600; border: none; font-size: 55px;} /* Black */
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
+a:link {
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+a:active {
+  text-decoration: none;
+}
+
+
+.circle {
+	border-radius:50%;
+	background-color:#1ecd0022;
+	display: none;
+	width:50px;
+	height:50px;
+	translate: -50% -50%;
+	z-index:0;
+	position:absolute;
+}
+
+.against {
+	border-radius:50%;
+	background-color:#ff3636;
+	display: none;
+	width:80px;
+	height:80px;
+	position:fixed;
+	z-index:1;
+	position:absolute;
+}
+.title {
+	font-size:80px;
+	text-align:center;
+	margin-bottom:-5;
+}
+.center {
+display:block;
+  margin: auto;
+  width: auto;
+}
+.nodrag {
+    user-drag: none;
+    -webkit-user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+.button2 {
+transition-duration:0.4s;
+cursor: pointer;
+}
+.button2:hover {
+transition-duration:0.4s;
+cursor: pointer;
+}
+.centered {
+  left: 50%;
+  margin: 0 0 0 -50px;
+}
+.screen {
+background-color:#f0f0f0;
+border-radius:10px;
+}
+.wall {
+margin:none;
+background-color:#ff3636;
+position:absolute;
+width:100%;
+height:7.5px;
+z-index:1;
+}
+.wall2 {
+margin:none;
+background-color:#ff3636;
+position:absolute;
+width:7.5px;
+height:100%;
+z-index:1;
+}
+
+</style>
+<link href="https://fonts.googleapis.com/css?family=Helvetica%20Neue%3Ai%2Cbi%2C700%2C300%2C400&display=swap" rel="stylesheet">
+</head>
+
+<body id="page">
+<!--Buttons and stuff-->
+<img
+  onclick="suite()"
+  class="nodrag button2"
+  style="right:15;bottom:15;position:absolute;"
+  src="suitebutton.svg"
+  height="50" />
+<img
+  onclick="quit()"
+  id="quitbutton"
+  class="nodrag button2"
+  style="left:15;bottom:15;position:absolute;display:none;"
+  src="exit.svg"
+  height="50" />
+  <img
+  onclick="reStartGame()"
+  id="restartbutton"
+  class="nodrag button2"
+  style="left:15;bottom:75;position:absolute;display:none;"
+  src="arrow.svg"
+  height="50" />
+<h2 class="noselect" id="quittext" style="
+position:fixed;
+left:75;
+display:none;
+transition-duration:0.4s;
+bottom:-25;">if game doesn't load</h2>
+<!--Start-->
+<div style="height:50%;padding-top:10%;" id="startscreen">
+<center>
+<img
+  class="nodrag"
+  style="margin-right:50px;margin-bottom:20"
+  src="circles.svg"
+  height="150" /></center>
+<!--<h1 class="noselect title">Circles!</h1>-->
+<button onclick="startGame(); startTimer()" style="margin-top:10;" class="nolink noselect center button button2">play game</button>
+<h1 style="margin-top:100;bottom:10;font-size:30;letter-spacing:-1;" class="noselect title">Made by <a style="text-decoration:underline"href="https://lorenzorogers.com">Lorenzo Rogers</a></h1>
+<h3 style="font-weight:300;margin-top:5;bottom:10;font-size:20;letter-spacing:-1;" class="noselect title">v1.0</h3>
+</div>
+
+<!--NewTimer-->
+<center>
+<div style="top:10px;position:absolute;"class="noselect screen centered timer">00:00:00</div>
+
+
+</center>
+
+<!--BORDER (shh)-->
+<center>
+<div
+style="
+display:none;
+position:relative;
+z-index:3;
+background-color:red;
+width: 97.5vw;
+height:100vh;
+border-radius:50px;
+
+"
+>
+
+</div>
+</center>
+<!--Game-->
+<div style="display:none" id="game">
+<span id="object" class="circle"></span>
+<div id="against" onmouseenter="endGame()" onmousemove="endGame()" onmouseover="endGame()" class='against'></div>
+</div>
+<!--End-->
+<center>
+<div style="margin-top:10%;transition-duration: 0.4s; opacity:0; display:none" class="vcenter" id="endscreen">
+<h1 class="noselect title">You got hit!</h1>
+<img
+  class="nodrag"
+  style="margin-bottom:20"
+  src="hit.svg"
+  height="150" />
+<button onclick="reStartGame()" class="nolink noselect center button button2">play again</button>
+<button onclick="quit()" style="margin-top:30px;" class="nolink noselect center button button2">quit</button>
+</center>
+
+
+</div>
+
+</body>
+<script>
+//stopwatch
+
+var stTimer = document.querySelector('.startTimer');
+var psTimer = document.querySelector('.pauseTimer');
+var timerDisplay = document.querySelector('.timer');
+var startTime;
+var updatedTime;
+var difference;
+var tInterval;
+var savedTime;
+var paused = 0;
+var running = 0;
+
+function startTimer(){
+  if(!running){
+    startTime = new Date().getTime();
+    tInterval = setInterval(getShowTime, 100);
+    paused = 0;
+    running = 1;
+
+  }
+}
+
+
+function pauseTimer(){
+  if (!difference){
+    // if timer never started, don't allow pause button to do anything
+  } else if (!paused) {
+    clearInterval(tInterval);
+    savedTime = difference;
+    paused = 1;
+    running = 0;
+
+  } else {
+    startTimer();
+  }
+}
+
+function resetTimer(){
+  clearInterval(tInterval);
+  savedTime = 0;
+  difference = 0;
+  paused = 0;
+  running = 0;
+
+}
+
+function getShowTime(){
+  updatedTime = new Date().getTime();
+if (savedTime){
+    difference = (updatedTime - startTime) + savedTime;
+  } else {
+    difference =  updatedTime - startTime;
+  }
+// var days = Math.floor(difference / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((difference % (1000 * 60)) / 1000);
+hours = (hours < 10) ? "0" + hours : hours;
+  minutes = (minutes < 10) ? "0" + minutes : minutes;
+  seconds = (seconds < 10) ? "0" + seconds : seconds;
+timerDisplay.innerHTML = hours + ':' + minutes + ':' + seconds;
+}
+
+//suite
+function suite() {
+  var h = document.getElementById("page");
+
+window.open("https://projects.lorenzorogers.com","_self")
+}
+//quit
+function quit() {
+location.reload();
+
+}
+//Start and end game
+
+function endGame() {
+
+if (end === "false") {
+
+	console.log("hit");
+	pauseTimer();
+
+	showAndHide();
+	function showAndHide() {
+  var x = document.getElementById("against");
+  var x2 = document.getElementById("object");
+  var y = document.getElementById("endscreen");
+
+	x.style.transitionDuration = "0.4s";
+   x2.style.transitionDuration = "0.4s";
+
+   	setTimeout(function(){
+	x.style.borderStyle = "solid";
+	x2.style.borderStyle = "solid";
+	x.style.borderWidth = "40px";
+	x2.style.borderWidth = "40px";
+	x.style.borderColor = "#1ecd00";
+	x2.style.borderColor = "#ff3636";
+}, 10);
+
+	setTimeout(function(){
+	x.style.opacity = "0";
+	x2.style.opacity = "0";
+}, 500);
+
+	setTimeout(function(){
+	x.style.display = "none";
+	x2.style.display = "none";
+}, 600);
+    y.style.display = "block";
+	setTimeout(function(){
+    y.style.opacity = "100";
+}, 700);
+    y.style.display = "block";
+
+}
+
+end = "true";
+
+
+} //if statement
+
+} //function
+
+//startgame
+
+function startGame() {
+	console.log("start");
+ end = "false";
+  var a = document.getElementById("against");
+  var a2 = document.getElementById("object");
+  var b = document.getElementById("startscreen");
+  var c = document.getElementById("game");
+    var d = document.getElementById("endscreen");
+	var e = document.getElementById("quitbutton");
+	var f = document.getElementById("quittext");
+	var g = document.getElementById("restartbutton");
+
+
+
+		console.log("something");
+	a.style.display = "inline-block";
+	a2.style.display = "inline-block";
+	c.style.display = "inline-block";
+		d.style.display = "none";
+		e.style.display = "block";
+		f.style.display = "block";
+		g.style.display = "block";
+
+
+	a.style.transitionDuration = "0s";
+   a2.style.transitionDuration = "0s";
+
+
+	a.style.borderStyle = "none";
+	a2.style.borderStyle = "none";
+	a.style.borderWidth = "none";
+	a2.style.borderWidth = "none";
+	a.style.borderColor = "none";
+	a2.style.borderColor = "none";
+
+
+
+	a.style.opacity = "100";
+	a2.style.opacity = "100";
+
+
+
+    b.style.display = "none";
+
+    b.style.opacity = "0";
+
+
+	setTimeout(function(){
+	f.style.opacity = "0";
+}, 600);
+}
+//restartgame
+
+function reStartGame() {
+ end = "false";
+
+	console.log("restart");
+		var f = document.getElementById("quittext");
+
+
+  var l = document.getElementById("game");
+  var m = document.getElementById("endscreen");
+
+  var n = document.getElementById("against");
+  var n2 = document.getElementById("object");
+
+		setTimeout(function(){
+		resetTimer();
+		startTimer();
+
+		console.log("restart");
+	l.style.display = "inline-block";
+	f.style.display = "block";
+	f.style.opacity = "100";
+	m.style.display = "none";
+	n.style.display = "inline-block";
+	n2.style.display = "inline-block";
+	n.style.transitionDuration = "0s";
+   n2.style.transitionDuration = "0s";
+
+	n.style.borderStyle = "none";
+	n2.style.borderStyle = "none";
+	n.style.borderWidth = "none";
+	n2.style.borderWidth = "none";
+	n.style.borderColor = "none";
+	n2.style.borderColor = "none";
+
+	n.style.opacity = "100";
+	n2.style.opacity = "100";
+}, 0);
+
+
+	setTimeout(function(){
+	f.style.opacity = "0";
+}, 600);
+
+}
+
+//against
+
+$(document).ready(function() {
+  animateDiv();
+
+});
+
+function makeNewPosition() {
+
+  // Get viewport dimensions (remove the dimension of the div)
+  var h = $(window).height() - 50;
+  var w = $(window).width() - 50;
+
+  var nh = Math.floor(Math.random() * h);
+  var nw = Math.floor(Math.random() * w);
+
+  return [nh, nw];
+
+}
+
+function animateDiv() {
+  var newq = makeNewPosition();
+  $('.against').animate({
+    top: newq[0],
+    left: newq[1]
+  }, function() {
+    animateDiv();
+  });
+
+};
+
+
+//you
+
+  var followCursor = (
+  function() {
+  var s = document.getElementById('object');
+  s.style.position = 'absolute';
+
+  return {
+    init: function() {
+      document.body.appendChild(s);
+    },
+
+    run: function(e) {
+      var e = e || window.event;
+      s.style.left = (e.clientX - 5) + 'px';
+      s.style.top = (e.clientY - 5) + 'px';
+    }
+  };
+}());
+
+window.onload = function() {
+  followCursor.init();
+  document.body.onmousemove = followCursor.run;
+  document.body.onmouseover = followCursor.run;
+}
+</script>
+</html>
