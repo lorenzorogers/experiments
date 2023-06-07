@@ -1,0 +1,345 @@
+<html>
+<head>
+<title>How fast can you move your mouse?</title>
+<!--<link rel="icon" href="clock5.png" sizes="16x16" type="image/png">-->
+<style>
+body {
+  font-family: 'neue-haas-grotesk-text';font-size: 16.9px; font-weight: 700;
+}
+h1 {
+  letter-spacing: -2px;
+}
+h2 {
+  letter-spacing: -1px;
+}
+body {
+  letter-spacing: -0.5px;
+}
+body {
+  font-size: 30px;
+}
+.button {z-index:1;background-color: #555555; color: white; border-radius: 16px; font-family: "Helvetica Neue"; font-weight: 600; border: none; font-size: 70px; transition-duration: 0.4s;} /* Black */
+.button:hover {z-index:1;background-color: #2b2b2b; color: white; border-radius: 16px; font-family: "Helvetica Neue"; font-weight: 600; border: none; font-size: 72px;} /* Black */
+.button:active {z-index:1;background-color: #1c1c1c; color: light-gray; border-radius: 16px; font-family: "Helvetica Neue"; font-weight: 600; border: none; font-size: 71.5px;} /* Black */
+
+.startbutton {background-color: #555555; color: white; border-radius: 16px; font-family: "Helvetica Neue"; font-weight: 600; border: none; font-size: 70px; transition-duration: 0.4s;} /* Black */
+.startbutton:hover {background-color: #2b2b2b; color: white; border-radius: 16px; font-family: "Helvetica Neue"; font-weight: 600; border: none; font-size: 80px;} /* Black */
+.startbutton:active {background-color: #1c1c1c; color: light-gray; border-radius: 16px; font-family: "Helvetica Neue"; font-weight: 600; border: none; font-size: 75px;} /* Black */
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
+.titles {
+  font-weight:500;
+}
+</style>
+<link rel="stylesheet" href="https://use.typekit.net/ffj2grr.css"></head>
+<link rel="icon" href="mouseicon2.png" type="image/png">
+
+
+</head>
+
+<body class="noselect" style="text-align:center">
+<br>
+<div id="start">
+<h1 class="noselect">How fast can you use your mouse?</h1>
+<h4 class="noselect" style="margin-top:-40">A very 'scientific' test</h4>
+<button onclick="showAndHide1()"class="noselect start startbutton">Start</button><br>
+</div>
+<button onclick="showAndHide2()"id="button1"class="noselect button"style="position:absolute;top:10;left:10;display: none">click here</button>
+<button onclick="showAndHide3()"id="button2"class="noselect button"style="position:absolute;bottom:10; left:10; display: none">click here</button>
+<button onclick="showAndHide4()"id="button3"class="noselect button"style="position:absolute;bottom:10;right:10;display: none">click here</button>
+<button onclick="showAndHide5()"id="button4"class="noselect button"style="position:absolute;top:10;right:10;display: none">click here</button>
+<button onclick="showAndHide6()"id="button5"class="noselect button"style="position:absolute;bottom:10;left:10;display: none">click here</button>
+<button onclick="showAndHide7()"id="button6"class="noselect button"style="position:absolute;top:10;left:10;display: none">click here</button>
+<button onclick="showAndHide8()"id="button7"class="noselect button"style="position:absolute;bottom:10;right:10;display: none">click here</button>
+<button onclick="showAndHide9()"id="button8"class="noselect button"style="position:absolute;top:10;right:10;display: none">click here</button>
+<button onclick="showAndHide10()"id="button9"class="noselect button"style="position:absolute;bottom:10;left:10;display: none">click here</button>
+<button onclick="showAndHide11()"id="button10"class="noselect button"style="position:absolute;top:10;right:10;display: none">click here</button>
+<button onclick="showAndHide12()"id="button11"class="noselect button"style="position:absolute;top:10;left:10;display: none">click here</button>
+<button onclick="showAndHide13()"id="button12"class="noselect button"style="position:absolute;bottom:10;left:10;display: none">click here</button>
+<button onclick="showAndHide14()"id="button13"class="noselect button"style="position:absolute;bottom:10;right:10;display: none">click here</button>
+<button onclick="showAndHide15()"id="button14"class="noselect button"style="position:absolute;top:10;right:10;display: none">click here</button>
+<button onclick="showAndHide16()"id="end"class="noselect stop button"style="position:absolute;top:10;left:10;display: none">end test</button>
+<center>
+<button onclick="restart()"id="play_again"class="noselect reset button"style="display: none">play again</button>
+</center>
+
+<div class="noselect titles"style="text-align:center; font-size:100px; position: relative; top: 30;">
+      <span style="background-color: lightsteelblue;"class="minute">00</span>
+      <span class="colon">:</span>
+      <span style="background-color: lightsalmon"class="second">00</span>
+      <span class="colon ms-colon">:</span>
+      <span style="background-color: plum"class="millisecond">00</span><br>
+</div>
+<br>
+<h5><a href="https://lorenzorogers.com">Mostly by Lorenzo Rogers</a></h5>
+<img
+  onclick="suite()"
+  class="nodrag button2"
+  style="right:15;bottom:15;position:absolute;"
+  src="./circles/suitebutton.svg"
+  height="50" />
+</body>
+<script>
+function suite() {
+  var h = document.getElementById("page");
+
+window.open("https://projects.lorenzorogers.com","_self")
+}
+  let hr = min = sec = ms = "0" + 0,
+    startTimer;
+
+  const startBtn = document.querySelector(".start"),
+   stopBtn = document.querySelector(".stop"),
+   resetBtn = document.querySelector(".reset");
+
+   startBtn.addEventListener("click", start);
+   stopBtn.addEventListener("click", stop);
+   resetBtn.addEventListener("click", reset);
+
+  function start() {
+    startBtn.classList.add("active");
+    stopBtn.classList.remove("stopActive");
+
+    startTimer = setInterval(()=>{
+      ms++
+      ms = ms < 10 ? "0" + ms : ms;
+
+      if(ms == 100){
+        sec++;
+        sec = sec < 10 ? "0" + sec : sec;
+        ms = "0" + 0;
+      }
+      if(sec == 60){
+        min++;
+        min = min < 10 ? "0" + min : min;
+        sec = "0" + 0;
+      }
+      if(min == 60){
+        hr++;
+        hr = hr < 10 ? "0" + hr : hr;
+        min = "0" + 0;
+      }
+      putValue();
+    },10); //1000ms = 1s
+
+  }
+
+  function stop() {
+    startBtn.classList.remove("active");
+    stopBtn.classList.add("stopActive");
+    clearInterval(startTimer);
+  }
+  function reset() {
+    startBtn.classList.remove("active");
+    stopBtn.classList.remove("stopActive");
+    clearInterval(startTimer);
+    hr = min = sec = ms = "0" + 0;
+    putValue();
+  }
+
+  function putValue() {
+    document.querySelector(".millisecond").innerText = ms;
+    document.querySelector(".second").innerText = sec;
+    document.querySelector(".minute").innerText = min;
+  }
+  </script>
+<script>
+function showAndHide1() {
+  var x = document.getElementById("start");
+  if (x.style.display === "block") {
+    x.style.display = "none";
+  } else {
+    x.style.display = "none";
+  }
+  var y = document.getElementById("button1");
+  y.style.display = "block";
+}
+
+function showAndHide2() {
+  var x = document.getElementById("button1");
+  if (x.style.display === "block") {
+    x.style.display = "none";
+  } else {
+    x.style.display = "none";
+  }
+  var y = document.getElementById("button2");
+  y.style.display = "block";
+}
+
+function showAndHide3() {
+  var x = document.getElementById("button2");
+  if (x.style.display === "block") {
+    x.style.display = "none";
+  } else {
+    x.style.display = "none";
+  }
+  var y = document.getElementById("button3");
+  y.style.display = "block";
+}
+
+function showAndHide4() {
+  var x = document.getElementById("button3");
+  if (x.style.display === "block") {
+    x.style.display = "none";
+  } else {
+    x.style.display = "none";
+  }
+  var y = document.getElementById("button4");
+  y.style.display = "block";
+}
+
+function showAndHide5() {
+  var x = document.getElementById("button4");
+  if (x.style.display === "block") {
+    x.style.display = "none";
+  } else {
+    x.style.display = "none";
+  }
+  var y = document.getElementById("button5");
+  y.style.display = "block";
+}
+
+function showAndHide6() {
+  var x = document.getElementById("button5");
+  if (x.style.display === "block") {
+    x.style.display = "none";
+  } else {
+    x.style.display = "none";
+  }
+  var y = document.getElementById("button6");
+  y.style.display = "block";
+}
+
+function showAndHide7() {
+  var x = document.getElementById("button6");
+  if (x.style.display === "block") {
+    x.style.display = "none";
+  } else {
+    x.style.display = "none";
+  }
+  var y = document.getElementById("button7");
+  y.style.display = "block";
+}
+
+function showAndHide8() {
+  var x = document.getElementById("button7");
+  if (x.style.display === "block") {
+    x.style.display = "none";
+  } else {
+    x.style.display = "none";
+  }
+  var y = document.getElementById("button8");
+  y.style.display = "block";
+}
+
+function showAndHide9() {
+  var x = document.getElementById("button8");
+  if (x.style.display === "block") {
+    x.style.display = "none";
+  } else {
+    x.style.display = "none";
+  }
+  var y = document.getElementById("button9");
+  y.style.display = "block";
+}
+
+function showAndHide10() {
+  var x = document.getElementById("button9");
+  if (x.style.display === "block") {
+    x.style.display = "none";
+  } else {
+    x.style.display = "none";
+  }
+  var y = document.getElementById("button10");
+  y.style.display = "block";
+}
+
+function showAndHide11() {
+  var x = document.getElementById("button10");
+  if (x.style.display === "block") {
+    x.style.display = "none";
+  } else {
+    x.style.display = "none";
+  }
+  var y = document.getElementById("button11");
+  y.style.display = "block";
+}
+
+function showAndHide12() {
+  var x = document.getElementById("button11");
+  if (x.style.display === "block") {
+    x.style.display = "none";
+  } else {
+    x.style.display = "none";
+  }
+  var y = document.getElementById("button12");
+  y.style.display = "block";
+}
+
+function showAndHide13() {
+  var x = document.getElementById("button12");
+  if (x.style.display === "block") {
+    x.style.display = "none";
+  } else {
+    x.style.display = "none";
+  }
+  var y = document.getElementById("button13");
+  y.style.display = "block";
+}
+
+function showAndHide14() {
+  var x = document.getElementById("button13");
+  if (x.style.display === "block") {
+    x.style.display = "none";
+  } else {
+    x.style.display = "none";
+  }
+  var y = document.getElementById("button14");
+  y.style.display = "block";
+}
+
+function showAndHide15() {
+  var x = document.getElementById("button14");
+  if (x.style.display === "block") {
+    x.style.display = "none";
+  } else {
+    x.style.display = "none";
+  }
+  var y = document.getElementById("end");
+  y.style.display = "block";
+}
+
+function showAndHide16() {
+  var x = document.getElementById("end");
+  if (x.style.display === "block") {
+    x.style.display = "none";
+  } else {
+    x.style.display = "none";
+  }
+  var y = document.getElementById("play_again");
+  y.style.display = "block";
+}
+
+function restart() {
+  var x = document.getElementById("play_again");
+  if (x.style.display === "block") {
+    x.style.display = "none";
+  } else {
+    x.style.display = "none";
+  }
+  var y = document.getElementById("start");
+  y.style.display = "block";
+}
+
+//prompt("Please enter your first name and initial.");
+</script>
+</html>
