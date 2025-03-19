@@ -1,3 +1,4 @@
+
 <html>
 <head>
 <title>Circles</title>
@@ -124,11 +125,45 @@ height:100%;
 z-index:1;
 }
 
+
+.rcMenu {
+  position:absolute;
+  background:red;
+  border:10px solid green;
+  border-radius: 16px;
+  transition-duration: 0.4s;
+  color:white;
+  z-index:1;
+}
+
 </style>
 <link rel="stylesheet" href="https://use.typekit.net/ffj2grr.css"></head>
 </head>
 
 <body id="page">
+<!--RCMenu-->
+<div id="rcMenu" class="rcMenu" onmouseenter="endGame()" onmousemove="endGame()" onmouseover="endGame()" style="display:none;">
+  <p>hello</p>
+</div>
+
+<script>
+document.onclick = hideMenu;
+document.oncontextmenu = rightClick;
+
+function hideMenu() {
+  document.getElementById(
+      "rcMenu").style.opacity = "0"
+    document.getElementById(
+        "rcMenu").style.display = ""
+}
+
+function rightClick(e) {
+  if (start === "true") {
+    e.preventDefault();
+  }
+}
+</script>
+
 <!--Buttons and stuff-->
 <img
   onclick="suite()"
@@ -297,7 +332,7 @@ location.reload();
 function endGame() {
 
 if (end === "false") {
-
+  start = "false";
 	console.log("hit");
 	pauseTimer();
 
@@ -348,6 +383,7 @@ end = "true";
 function startGame() {
 	console.log("start");
  end = "false";
+ start = "true";
   var a = document.getElementById("against");
   var a2 = document.getElementById("object");
   var b = document.getElementById("startscreen");
@@ -400,6 +436,7 @@ function startGame() {
 
 function reStartGame() {
  end = "false";
+ start = "true"
 
 	console.log("restart");
 		var f = document.getElementById("quittext");
@@ -497,6 +534,8 @@ function animateDiv() {
 
 window.onload = function() {
   followCursor.init();
+  start = "false";
+  console.log("project loaded");
   document.body.onmousemove = followCursor.run;
   document.body.onmouseover = followCursor.run;
 }

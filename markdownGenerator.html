@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <title>the Markdown URL generator.</title>
+
+    <link rel="icon" href="./icon.png"></link>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <meta name="title" content="the Markdown URL generator.">
+    <meta name="description" content="I hate making Markdown URLs. So I spent more time trying to code a solution.">
+    <meta name="keywords" content="markdown,url,generator">
+    <meta name="robots" content="index, nofollow">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="language" content="English">
+    <meta name="author" content="Lorenzo Rogers">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="./styles.css"></link>
+
+  </head>
+
+  <body>
+
+    <div class="contentContainer">
+
+      <div id="pageContent" class="pageContent">
+
+        <span class="pageTitle">the Markdown URL generator.</span>
+
+        <input id="inputURL" type="text" name="text" placeholder="link URL here"/>
+
+        <input id="inputText" type="text" name="text" placeholder="visible text here"/>
+
+        <span class="buttons">
+
+          <button onclick="submit();">submit</button>
+
+          <button onclick="copy();">copy markdown</button>
+
+        </span>
+
+        <span id="output" class="output">output</span>
+
+      </div>
+
+    </div>
+
+  </body>
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="./markdown.js"></script>
+  <script>
+    lucide.createIcons();
+  </script>
+
+</html>
